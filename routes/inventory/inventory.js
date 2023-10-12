@@ -3,7 +3,6 @@ const multer = require("multer");
 
 const {
   createInventory,
-  listInventories,
   getInventories,
   getInventory,
   editInventory,
@@ -31,7 +30,6 @@ router.get(
   commonRole,
   getInventories
 );
-router.get("/inventory", isAuthenticatedInventory, commonRole, listInventories);
 router.get(
   "/inventory/:id",
   isAuthenticatedInventory,

@@ -14,17 +14,11 @@ const createInventory = async (req, res) => {
     return res.status(500).json({ error: "Server error. Please try again" });
   }
 };
-const listInventories = async (req, res) => {
-  try {
-    let temp = await User.findOne({ userId: req.user.userId }).lean();
-    temp = temp.inventoryIds.map((ele) => ele.toString());
-    return res.status(200).json(temp);
-  } catch (error) {
-    return res.status(500).json({ error: "Server error. Please try again" });
-  }
-};
+
 const getInventories = async (req, res) => {
   try {
+    let user = await User.findOne({ userId: req.user.userId }).lean();
+    let userinventories = user.inventoryIds.map((ele) => ele.toString());
     const temp = await Inventory.find();
     return res.status(200).json(temp);
   } catch (error) {
@@ -77,7 +71,6 @@ const uploadimage = async (req, res) => {
 
 module.exports = {
   createInventory,
-  listInventories,
   getInventories,
   getInventory,
   editInventory,
