@@ -19,8 +19,8 @@ const getInventories = async (req, res) => {
   try {
     let user = await User.findOne({ userId: req.user.userId }).lean();
     let userinventories = user.inventoryIds.map((ele) => ele.toString());
-    const temp = await Inventory.find();
-    return res.status(200).json(temp);
+    const inventories = await Inventory.find({ _id: { $in: userinventories } });
+    return res.status(200).json(inventories);
   } catch (error) {
     return res.status(500).json({ error: "Server error. Please try again" });
   }
