@@ -7,7 +7,7 @@ const {
   getInventory,
   editInventory,
   deleteInventory,
-  uploadimage
+  uploadFileController
 } = require("../../controller");
 
 const storage = multer.memoryStorage();
@@ -17,7 +17,7 @@ const { isAuthenticatedInventory, commonRole } = require("../../middleware");
 
 const router = new Router();
 
-router.post("/upload", upload.single("image"), uploadimage);
+router.post("/upload", upload.single("file"), uploadFileController);
 router.post(
   "/inventory",
   isAuthenticatedInventory,
